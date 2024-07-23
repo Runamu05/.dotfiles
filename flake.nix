@@ -9,6 +9,11 @@
 	    inputs.nixpkgs.follows = "nixpkgs";
 	  };
 
+    nixvim = {
+      url = "github:Runamu05/.nixvim";
+      #inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
