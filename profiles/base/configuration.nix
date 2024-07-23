@@ -99,8 +99,10 @@
       appimage-run
       kate
       kdeconnect
+      discord
       neovim
       brave
+      telegram-desktop
     #  thunderbird
     ];
   };
