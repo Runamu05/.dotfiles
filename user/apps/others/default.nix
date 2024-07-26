@@ -2,7 +2,12 @@
 
 {
   imports = [
+    ./appimagerun.nix
+    ./kdeconnect.nix
     ./spicetify.nix
-    ./spotube.nix
+    ./gpt4all.nix
+    ./obs.nix
+    ./vlc.nix
+    #./spotube.nix
   ];
 }

@@ -1,8 +1,15 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
  imports = [
-   ./git/git.nix
+   ../../git/git.nix
+   ../../user/apps/games
+   ../../user/apps/socials
+   ../../user/apps/editors
+   ../../user/apps/others
+   ../../user/apps/browsers
+   ../../user/shell
+
  ];
 
  nixpkgs.config = {
@@ -13,7 +20,7 @@
  home.username = "runamu";
  home.homeDirectory = "/home/runamu";
 
- home.stateVersion = "24.05";
+ home.stateVersion = "24.11";
 
  home.packages = with pkgs; [];
 
