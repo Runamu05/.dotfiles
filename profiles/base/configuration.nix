@@ -2,13 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware 
       ../../system/hardware-configuration.nix
       ../../system/hardware
+      ../../system/wm/hyprland.nix
+      ../../system/terminals/alacritty.nix
+      ../../system/dependencies
+      ../../system/fonts/fonts.nix
+      ../../system/apps/games
+      ../../system/apps/performance
     ];
 
   # Bootloader.
@@ -17,6 +23,9 @@
 
   networking.hostName = "runapc"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Enable tlp (saves battery life)
+  #services.tlp.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -44,12 +53,15 @@
   };
 
   # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
+  # Enable the sddm Display Manager.
   services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+
+  #nix.settings = {
+  #  substituters = ["https://hyprland.cachix.org"];
+  #  trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  #};
 
   # Configure keymap in X11
   services.xserver = {
