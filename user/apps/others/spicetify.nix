@@ -8,6 +8,12 @@ imports = [
 programs.spicetify =
    let
      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+
+     officialThemesOLD = pkgs.fetchgit {
+       url = "https://github.com/spicetify/spicetify-themes";
+       rev = "c2751b48ff9693867193fe65695a585e3c2e2133";
+       sha256 = "0rbqaxvyfz2vvv3iqik5rpsa3aics5a7232167rmyvv54m475agk";
+     };
    in
    {
      enable = true;
@@ -25,10 +31,13 @@ programs.spicetify =
      enabledExtensions = with spicePkgs.extensions; [
        adblock
        hidePodcasts
-       fullAppDisplay
+       #fullAppDisplay
+       fullScreen
        loopyLoop
        playlistIntersection
        playlistIcons
+       trashbin
+       showQueueDuration
        seekSong
        powerBar
        listPlaylistsWithSong
@@ -48,22 +57,24 @@ programs.spicetify =
      customColorScheme = {
        text = "ffa100";
        subtext = "F0F0F0";
+       extratext = "F0F0F0";
        sidebar-text = "ffa100";
        highlight = "202020";
+       highlight-elevated = "febb5e";
        main = "232323";
        main-elevated = "202020";
        background = "171717";
        sidebar = "171717";
-       player = "232323";
-       card = "232323";
-       shadow = "1f1d2e";
+       player = "202020";
+       card = "202020";
+       shadow = "171717";
        selected-row = "ffa100";
        button = "ff8b00";
-       button-active = "f45236";
+       button-active = "ff5e00";
        button-disabled = "202020";
        tab-active = "ff8b00";
        notification = "202020";
-       notification-error = "eb6f92";
+       notification-error = "ffa100";
        misc = "3a3a3a";
      };
    };
