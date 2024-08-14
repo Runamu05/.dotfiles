@@ -46,32 +46,34 @@
       ", XF86PowerOff, exec, "
 
       # Quit session 
-      "$mod, L, exit,"
+      "$mod SHIFT, L, exit,"
 
       # Terminal
       "$mod SHIFT, T, exec, $terminal"
 
       # Rebuild NixOS
-      "$mod SHIFT CTRL, R, exec, $terminal -e nu -c sudo nixos-rebuild switch --flake ~/.dotfiles/.#system --show-trace && home-manager switch --flake ~/.dotfiles#user --show-trace"
+      "$mod SHIFT CTRL, R, exec, $terminal -e bash -c sudo nixos-rebuild switch --flake ~/.dotfiles/.#system --show-trace && home-manager switch --flake ~/.dotfiles#user --show-trace"
       # Update NixOS
-      "$mod SHIFT CTRL, U, exec, $terminal -e nu -c nix flake update ~/.dotfiles --show-trace"
+      "$mod SHIFT CTRL, U, exec, $terminal -e bash -c nix flake update ~/.dotfiles --show-trace"
       # Clean NixOS
-      "$mod SHIFT CTRL, C, exec, $terminal -e nu -c sudo nix-collect-garbage --delete-old --show-trace"
+      "$mod SHIFT CTRL, C, exec, $terminal -e bash -c sudo nix-collect-garbage --delete-old --show-trace"
 
       # Manage windows and Move focus
       "$mod, Q, killactive,"
+      "$mod, F, fullscreen,"
       "$mod, left, movefocus, l"
       "$mod, right, movefocus, r"
       "$mod, up, movefocus, u"
       "$mod, down, movefocus, d"
       "$mod, P, pseudo # dwindle"
       "$mod, J, togglesplit,"
+      "$mod, L, lockactivegroup, toggle"
 
   
       # Screenshot and Save
-      "$mod, Print, exec, ${pkgs.hyprshot}/bin/hyprshot -m output"
+      #"$mod, Print, exec, flameshot gui --path \"~/Immagini/Schermate\" --accept-on-select"
       # Screenshot and Copy to Clipboard
-      ", Print, exec, ${pkgs.hyprshot}/bin/hyprshot -m output --clipboard-only" 
+      #", Print, exec, flameshot gui --clipboard --accept-on-select" 
 
       # Utility
       "$mod SHIFT, H, exec, $terminal -e nu -c ${pkgs.btop}/bin/btop"
@@ -81,9 +83,9 @@
       "$mod, T, exec, telegram-desktop"
       "$mod, S, exec, spotify"
       "$mod, O, exec, obs"
-      "$mod SHIFT, S, exec, gamemoderun steam"
+      "$mod SHIFT, S, exec, steam"
       "$mod, C, exec, cemu"
-      "$mod, D, exec, dolphin"
+      "$mod, D, exec, ${pkgs.dolphin}/bin/dolphin"
       "$mod, B, exec, brave"
     ] ++ (
         # workspaces
@@ -124,7 +126,7 @@
       col.active_border = rgba(ff6a00d4) rgba(ff42a5ed) 45deg
       col.inactive_border = rgba(595959aa)
 
-      layout = dwindle
+      layout = master
 
       # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
       allow_tearing = false

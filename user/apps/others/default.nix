@@ -10,6 +10,5 @@
     ./obs.nix
     ./vlc.nix
     ./ddrescue.nix
-    #./spotube.nix
   ];
 }
