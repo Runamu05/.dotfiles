@@ -11,7 +11,7 @@
     wireplumber.enable = true;
   };
 
-  # ensure pulseaudio disabled
+  # Ensure Pulseaudio is disabled
   hardware.pulseaudio.enable = false;
 
   users.users."runamu" = {
