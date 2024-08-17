@@ -2,7 +2,7 @@
 
 {
   imports = [
-   ./bluetooth.nix 
-   ./graphics.nix
+    ./bluetooth.nix 
+    ./graphics.nix
   ];
 }

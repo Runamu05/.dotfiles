@@ -58,11 +58,6 @@
   # Enable the sddm Display Manager.
   services.displayManager.sddm.enable = true;
 
-  #nix.settings = {
-  #  substituters = ["https://hyprland.cachix.org"];
-  #  trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  #};
-
   # Configure keymap in X11
   services.xserver = {
     layout = "de";
@@ -81,8 +76,28 @@
   # Enable AMD rocm support
   nixpkgs.config.rocmSupport=true;
 
+  # Manage GPU governor and fan speed
+  environment.systemPackages = with pkgs; [ lact ];
+  systemd.services.lact = {
+    description = "AMDGPU Control Daemon";
+    after = ["multi-user.target"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.lact}/bin/lact daemon";
+    };
+    enable = true;
+  };
+
   # Default Shell
   users.defaultUserShell = pkgs.nushell;
+
+  # Storage optimization
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-old";
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.runamu = {
@@ -90,8 +105,8 @@
     description = "Runamu";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      #lm-sensors
       neovim
+      git
     ];
   };
 
@@ -100,7 +115,6 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ git ];
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
 

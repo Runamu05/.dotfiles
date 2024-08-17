@@ -41,34 +41,25 @@
 
     bind = [
       # Override Power-off and Reboot commands
-      "$mod SHIFT, R, exec, systemctl reboot"
-      "$mod SHIFT, P, exec, systemctl poweroff"
+      "$mod SHIFT CTRL, R, exec, systemctl reboot"
+      "$mod SHIFT CTRL, P, exec, systemctl poweroff"
       ", XF86PowerOff, exec, "
 
       # Quit session 
-      "$mod SHIFT, L, exit,"
+      "$mod SHIFT CTRL, L, exit,"
 
       # Terminal
       "$mod SHIFT, T, exec, $terminal"
 
-      # Rebuild NixOS
-      "$mod SHIFT CTRL, R, exec, $terminal -e bash -c sudo nixos-rebuild switch --flake ~/.dotfiles/.#system --show-trace && home-manager switch --flake ~/.dotfiles#user --show-trace"
-      # Update NixOS
-      "$mod SHIFT CTRL, U, exec, $terminal -e bash -c nix flake update ~/.dotfiles --show-trace"
-      # Clean NixOS
-      "$mod SHIFT CTRL, C, exec, $terminal -e bash -c sudo nix-collect-garbage --delete-old --show-trace"
-
       # Manage windows and Move focus
-      "$mod, Q, killactive,"
-      "$mod, F, fullscreen,"
+      "$mod SHIFT, Q, killactive,"
+      "$mod SHIFT, F, fullscreen,"
       "$mod, left, movefocus, l"
       "$mod, right, movefocus, r"
       "$mod, up, movefocus, u"
       "$mod, down, movefocus, d"
-      "$mod, P, pseudo # dwindle"
+      "$mod SHIFT, P, pseudo # dwindle"
       "$mod, J, togglesplit,"
-      "$mod, L, lockactivegroup, toggle"
-
   
       # Screenshot and Save
       #"$mod, Print, exec, flameshot gui --path \"~/Immagini/Schermate\" --accept-on-select"
@@ -78,15 +69,18 @@
       # Utility
       "$mod SHIFT, H, exec, $terminal -e nu -c ${pkgs.btop}/bin/btop"
       "$mod SHIFT, C, exec, corectrl"
+      "$mod, L, exec, lact"
 
       # Apps
       "$mod, T, exec, telegram-desktop"
       "$mod, S, exec, spotify"
       "$mod, O, exec, obs"
+      "$mod, I, exec, ${pkgs.jetbrains.idea-community-bin}/bin/idea-community"
       "$mod SHIFT, S, exec, steam"
+      "$mod, M, exec, prismlauncher"
       "$mod, C, exec, cemu"
       "$mod, D, exec, ${pkgs.dolphin}/bin/dolphin"
-      "$mod, B, exec, brave"
+      "$mod, B, exec, ${pkgs.brave}/bin/brave"
     ] ++ (
         # workspaces
         # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
@@ -109,7 +103,7 @@
   wayland.windowManager.hyprland.extraConfig = ''
     input {
       kb_layout = de
-        kb_variant = nodeadkeys
+      kb_variant = nodeadkeys
     }
 
     monitor = , highres, auto, 1 

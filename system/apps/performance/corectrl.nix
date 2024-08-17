@@ -1,6 +1,12 @@
 { pkgs, ... }:
 
 { 
-  #environment.systemPackages = with pkgs; [ corectrl ];
-  programs.corectrl.enable = true;
+  programs.corectrl = {
+    enable = true;
+    gpuOverclock.enable = true;
+  };
+
+  users.users.runamu.extraGroups = [ "corectrl" ];
+
+  environment.systemPackages = [ pkgs.lm_sensors ];
 }

@@ -2,6 +2,7 @@
 
 {
   imports = [
-    ./cemu.nix
+    #./cemu.nix
+    ./minecraft.nix
   ];
 }
