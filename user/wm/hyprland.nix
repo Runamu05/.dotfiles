@@ -107,7 +107,8 @@
     }
 
     monitor = , highres, auto, 1 
-    env = XCURSOR_SIZE, 24 
+    env = XCURSOR_SIZE, 24
+    env = GTK_THEME, ${pkgs.nightfox-gtk-theme}/bin/nightfox-gtk-theme
 
     exec = ${pkgs.swaybg}/bin/swaybg -m fill -i ${/home/runamu/Scrivania/trainsunset.jpg}
 

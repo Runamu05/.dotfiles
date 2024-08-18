@@ -76,6 +76,11 @@
   # Enable AMD rocm support
   nixpkgs.config.rocmSupport=true;
 
+  # Manage CPU
+  powerManagement.enable = true;
+  powerManagement.cpuFreqGovernor = "ondemand";
+  powerManagement.cpufreq.min = 2500000;
+
   # Manage GPU governor and fan speed
   environment.systemPackages = with pkgs; [ lact ];
   systemd.services.lact = {
