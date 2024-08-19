@@ -76,12 +76,11 @@
   # Enable AMD rocm support
   nixpkgs.config.rocmSupport=true;
 
-  # Manage CPU
-  services.thermald.enable = true;
-  services.auto-cpufreq.enable = true;
-
-  # Manage GPU governor and fan speed
-  environment.systemPackages = with pkgs; [ lact ];
+  # Manage CPU, GPU governor and fan speed
+  environment.systemPackages = with pkgs; [
+    cpupower-gui
+    lact
+  ];
   systemd.services.lact = {
     description = "AMDGPU Control Daemon";
     after = ["multi-user.target"];
