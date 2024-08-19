@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ../../git/git.nix
     ../../user/wm/hyprland.nix
     ../../user/apps/games
     ../../user/apps/socials
