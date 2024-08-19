@@ -77,9 +77,8 @@
   nixpkgs.config.rocmSupport=true;
 
   # Manage CPU
-  powerManagement.enable = true;
-  powerManagement.cpuFreqGovernor = "ondemand";
-  powerManagement.cpufreq.min = 2500000;
+  services.thermald.enable = true;
+  services.auto-cpufreq.enable = true;
 
   # Manage GPU governor and fan speed
   environment.systemPackages = with pkgs; [ lact ];

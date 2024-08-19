@@ -18,15 +18,12 @@ programs.spicetify =
    {
      enable = true;
 
-     #enabledCustomApps = with spicePkgs.apps; [
-      # new-releases
-       #lyrics-plus
-       #{
-        #  name = "spicetifyDependencies";
-         # src = spicetifyDependencies;
-          #appendName = true;
-        #}
-     #];
+     enabledCustomApps = with spicePkgs.apps; [
+       lyricsPlus
+       ncsVisualizer
+       marketplace
+       newReleases
+     ];
 
      enabledExtensions = with spicePkgs.extensions; [
        adblock
@@ -34,17 +31,14 @@ programs.spicetify =
        #fullAppDisplay
        fullScreen
        loopyLoop
-       playlistIntersection
-       playlistIcons
+       copyLyrics
+       betterGenres
        trashbin
-       showQueueDuration
-       seekSong
-       powerBar
+       beautifulLyrics
+       history
        listPlaylistsWithSong
        savePlaylists
-       popupLyrics
        volumePercentage
-       history
        shuffle # shuffle+ (special characters are sanitized out of extension names)
      ];
 

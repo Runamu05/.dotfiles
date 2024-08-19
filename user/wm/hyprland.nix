@@ -1,24 +1,34 @@
-{ pkgs, ... }:
+{ inputs, lib, pkgs, ... }:
 
 {
   wayland.windowManager.hyprland = {
-  # Whether to enable Hyprland wayland compositor
-  enable = true;
-  # The hyprland package to use
-  package = pkgs.hyprland;
-  # Whether to enable XWayland
-  xwayland.enable = true;	
-  # Set keyboard layout
+    enable = true;
+    package = pkgs.hyprland;
+    xwayland.enable = true;	
+    systemd.enable = true;
 
-
-  # Optional
-  # Whether to enable hyprland-session.target on hyprland startup
-  systemd.enable = true;
-  # Whether to enable patching wlroots for better Nvidia support
-  #enableNvidiaPatches = true;
+    plugins = [
+    #   inputs.hyprland-plugins.packages."${pkgs.system}".hyprbars
+    #  inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
+    ];
   };
 
   wayland.windowManager.hyprland.settings = {
+    # Set keyboard layout
+    input = {
+      kb_layout = "de";
+      kb_variant = "nodeadkeys";
+    };
+
+    # Set monitor
+    monitor = ", highres, auto, 1";
+
+    # Size cursor
+    env = "XCURSOR_SIZE, 24"; 
+
+    # Set wallpaper
+    exec = "${pkgs.swaybg}/bin/swaybg -m fill -i ${/home/runamu/Scrivania/trainsunset.jpg}";
+
     "$mod" = "SUPER";
     "$terminal" = "${pkgs.alacritty}/bin/alacritty";
 
@@ -98,19 +108,13 @@
           )
           10)
       );
+
+
   };
 
   wayland.windowManager.hyprland.extraConfig = ''
-    input {
-      kb_layout = de
-      kb_variant = nodeadkeys
-    }
 
-    monitor = , highres, auto, 1 
-    env = XCURSOR_SIZE, 24
     env = GTK_THEME, ${pkgs.nightfox-gtk-theme}/bin/nightfox-gtk-theme
-
-    exec = ${pkgs.swaybg}/bin/swaybg -m fill -i ${/home/runamu/Scrivania/trainsunset.jpg}
 
     general {
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
@@ -161,6 +165,33 @@
      dim_strength = 0.3
      col.shadow = rgba(1a1a1aee)
    }
+
+   #plugin {
+   #  borders-plus-plus {
+   #    add_borders = 1 # 0 - 9
+    
+   #    # you can add up to 9 borders
+   #    col.border_1 = "rgb(ffffff)"
+   #    col.border_2 = "rgb(2222ff)"
+    
+   #    # -1 means "default" as in the one defined in general:border_size
+   #    border_size_1 = 10
+   #    border_size_2 = -1
+
+   #    # makes outer edges match rounding of the parent. Turn on / off to better understand. Default = on.
+   #    natural_rounding = true
+   #  }
+
+   #  hyprbars {
+   #    # example config
+   #    bar_height = 20
+
+   #    # example buttons (R -> L)
+   #    # hyprbars-button = color, size, on-click
+   #    hyprbars-button = rgb(ff4040), 10, , hyprctl dispatch killactive
+   #    hyprbars-button = rgb(eeee11), 10, , hyprctl dispatch fullscreen 1
+   #  }
+  #}
 
   ''; 
 }
