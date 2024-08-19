@@ -1,5 +1,5 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
-  packages.ark.enable = true;
+  home.packages = with pkgs; [ ark ];
 }
