@@ -2,6 +2,8 @@
 
 {
   imports = [
+    ./mangohud.nix
+    ./ark.nix
     ./appimagerun.nix
     ./kdeconnect.nix
     ./spicetify.nix
