@@ -30,7 +30,7 @@
     exec = "${pkgs.swaybg}/bin/swaybg -m fill -i ${/home/runamu/Scrivania/trainsunset.jpg}";
 
     "$mod" = "SUPER";
-    "$terminal" = "${pkgs.alacritty}/bin/alacritty";
+    "$terminal" = "${pkgs.kitty}/bin/kitty";
 
     bindm = [
       # Move/resize windows with mod + LMB/RMB and dragging
@@ -50,6 +50,11 @@
     ];
 
     bind = [
+      # Rebuild NixOS
+      "$mod CTRL, R, exec, $terminal $HOME/.dotfiles/nixrebuild.sh"
+      # Update NixOS
+      "$mod CTRL, U, exec, $terminal $HOME/.dotfiles/nixupdate.sh"
+
       # Override Power-off and Reboot commands
       "$mod SHIFT CTRL, R, exec, systemctl reboot"
       "$mod SHIFT CTRL, P, exec, systemctl poweroff"
@@ -71,10 +76,10 @@
       "$mod SHIFT, P, pseudo # dwindle"
       "$mod, J, togglesplit,"
   
-      # Screenshot and Save
-      #"$mod, Print, exec, flameshot gui --path \"~/Immagini/Schermate\" --accept-on-select"
+      # Screenshot, Copy to Clipboard and Save
+      "$mod, Print, exec, ${pkgs.grimblast}/bin/grimblast --notify copysave"
       # Screenshot and Copy to Clipboard
-      #", Print, exec, flameshot gui --clipboard --accept-on-select" 
+      ", Print, exec, ${pkgs.grimblast}/bin/grimblast --notify copy"
 
       # Utility
       "$mod SHIFT, H, exec, $terminal -e nu -c ${pkgs.btop}/bin/btop"
@@ -103,6 +108,7 @@
             in [
               "$mod, ${ws}, workspace, ${toString (x + 1)}"
               "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+              "$mod CTRL, ${ws}, movetoworkspace, ${toString (x + 1)}"
               "$mod SHIFT CTRL, ${ws}, movetoworkspace, ${toString (x + 1)}"
             ]
           )
