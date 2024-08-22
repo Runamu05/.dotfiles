@@ -82,7 +82,8 @@
       ", Print, exec, ${pkgs.grimblast}/bin/grimblast --notify copy"
 
       # Utility
-      "$mod SHIFT, H, exec, $terminal -e nu -c ${pkgs.btop}/bin/btop"
+      "$mod SHIFT, H, exec, $terminal ${pkgs.btop}/bin/btop"
+      "$mod, N, exec, $terminal nvim"
       "$mod SHIFT, C, exec, corectrl"
       "$mod, L, exec, lact"
 
