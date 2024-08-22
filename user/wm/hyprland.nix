@@ -27,7 +27,7 @@
     env = "XCURSOR_SIZE, 24"; 
 
     # Set wallpaper
-    exec = "${pkgs.swaybg}/bin/swaybg -m fill -i ${/home/runamu/Scrivania/trainsunset.jpg}";
+    #exec = "${pkgs.swaybg}/bin/swaybg -m fill -i ${/home/runamu/Scrivania/trainsunset.jpg}";
 
     "$mod" = "SUPER";
     "$terminal" = "${pkgs.kitty}/bin/kitty";
