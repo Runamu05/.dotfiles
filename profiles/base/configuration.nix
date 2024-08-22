@@ -21,6 +21,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Kernel
+  #boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_6);
+  #boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_6.cpupower;
+
   networking.hostName = "runapc"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -59,9 +63,9 @@
   services.displayManager.sddm.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "de";
-    xkbVariant = "nodeadkeys";
+    variant = "nodeadkeys";
   };
 
   # Configure console keymap
@@ -77,8 +81,14 @@
   nixpkgs.config.rocmSupport=true;
 
   # Manage CPU, GPU governor and fan speed
+  powerManagement = {
+    enable = true;
+    cpuFreqGovernor = "performance";
+  };
   environment.systemPackages = with pkgs; [
-    cpupower-gui
+    linuxKernel.packages.linux_6_6.cpupower
+    linuxKernel.packages.linux_6_6.ryzen-smu
+    ryzenadj
     lact
   ];
   systemd.services.lact = {
