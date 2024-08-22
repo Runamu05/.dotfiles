@@ -17,7 +17,7 @@
       "-f"
       "-e"
       "--force-windows-fullscreen"
-      "--mangoapp"
+      #"--mangoapp"
     ];
   };
 }
