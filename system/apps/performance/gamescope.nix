@@ -12,12 +12,13 @@
       "-h" = "1080";
       "-r" = "60";
       "--backend" = "wayland";
+      #"MANGOHUD_CONFIGFILE" = "$HOME/.config/MangoHud/MangoHud.conf";
     };
     args = [
       "-f"
       "-e"
       "--force-windows-fullscreen"
-      #"--mangoapp"
+      "--mangoapp"
     ];
   };
 }
