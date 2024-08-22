@@ -22,8 +22,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel
-  #boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_6);
-  #boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_6.cpupower;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "runapc"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -81,17 +80,27 @@
   nixpkgs.config.rocmSupport=true;
 
   # Manage CPU, GPU governor and fan speed
-  powerManagement = {
-    enable = true;
-    cpuFreqGovernor = "performance";
+  hardware.cpu.amd.ryzen-smu.enable = true;
+  hardware.cpu.amd.updateMicrocode = true;
+
+  services.tlp = {
+    enable = false;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_SCALING_MIN_FREQ_ON_AC = 2400000;
+      CPU_SCALING_MAX_FREQ_ON_AC = 4300000;
+      CPU_SCALING_MIN_FREQ_ON_BAT = 800000;
+      CPU_SCALING_MAX_FREQ_ON_BAT = 3000000;
+    };
   };
   environment.systemPackages = with pkgs; [
     msr-tools
-    linuxKernel.packages.linux_6_6.cpupower
-    linuxKernel.packages.linux_6_6.ryzen-smu
     ryzenadj
     lact
   ];
+
   systemd.services.lact = {
     description = "AMDGPU Control Daemon";
     after = ["multi-user.target"];
@@ -107,11 +116,11 @@
 
   # Storage optimization
   nix.settings.auto-optimise-store = true;
-  nix.gc = {
-    automatic = true;
-    dates = "daily";
-    options = "--delete-old";
-  };
+  #nix.gc = {
+  #  automatic = true;
+  #  dates = "daily";
+  #  options = "--delete-old";
+  #};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.runamu = {
