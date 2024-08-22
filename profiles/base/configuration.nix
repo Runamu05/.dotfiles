@@ -86,6 +86,7 @@
     cpuFreqGovernor = "performance";
   };
   environment.systemPackages = with pkgs; [
+    msr-tools
     linuxKernel.packages.linux_6_6.cpupower
     linuxKernel.packages.linux_6_6.ryzen-smu
     ryzenadj
