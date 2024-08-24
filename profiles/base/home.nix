@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../user/wm/hyprland.nix
+    ../../user/wm/hyprland/default.nix
     ../../user/apps/games
     ../../user/apps/socials
     ../../user/apps/editors
