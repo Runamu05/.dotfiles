@@ -6,8 +6,8 @@
     discord
   ];
 
-  programs.thunderbird = {
-    enable = true;
+  #programs.thunderbird = {
+  #  enable = true;
     #TODO Add configuration
-  };
+  #};
 }
