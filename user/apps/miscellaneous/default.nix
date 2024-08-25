@@ -3,6 +3,7 @@
 {
   imports = [
     ./spicetify.nix
+    ./mangohud.nix
   ];
 
   home.packages = with pkgs; [
