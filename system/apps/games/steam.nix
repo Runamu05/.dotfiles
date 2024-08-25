@@ -1,10 +1,5 @@
 { pkgs, ... }:
 
-
-let
-  # Set MangoHud config path
-  MANGOHUD_CONFIGFILE = "$HOME/.config/MangoHud/MangoHud.conf";
-in
 {
   # Configure Steam
   programs.steam = {
@@ -31,22 +26,14 @@ in
       "-h" = "1080";
       "-r" = "60";
       "--backend" = "wayland";
+      #"MANGOHUD_CONFIGFILE" = "$HOME/.config/MangoHud/MangoHud.conf";
     };
     args = [
-      "${MANGOHUD_CONFIGFILE}"
       "-f"
       "-e"
       "--force-windows-fullscreen"
       "--mangoapp"
     ];
-  };
-
-  # Configure MangoHud
-  programs.mangohud = {
-    enable = true;
-    settings = {
-      preset = 4;
-    };
   };
 }
 
