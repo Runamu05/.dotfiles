@@ -5,8 +5,10 @@
     wget
     curl
     neofetch
+    # Get system stats
     htop
     btop
+    # Manage audio
     pavucontrol
   ];
 }
