@@ -1,6 +1,12 @@
 { pkgs, ... }:
 
+
+let
+  # Set MangoHud config path
+  MANGOHUD_CONFIGFILE = "$HOME/.config/MangoHud/MangoHud.conf";
+in
 {
+  # Configure Steam
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
@@ -11,6 +17,36 @@
   environment.sessionVariables = {
      STEAM_EXTRA_COMPAT_TOOLS_PATHS =
         "/home/runamu/.steam/root/compatibilitytools.d";
+  };
+
+  # Configure Gamescope
+  programs.gamescope = {
+    enable = true;
+    env = {
+      "XKB_DEFAULT_LAYOUT" = "de";
+      "XKB_DEFAULT_VARIANT" = "nodeadkeys";
+      "-W" = "1920";
+      "-w" = "1920";
+      "-H" = "1080";
+      "-h" = "1080";
+      "-r" = "60";
+      "--backend" = "wayland";
+    };
+    args = [
+      "${MANGOHUD_CONFIGFILE}"
+      "-f"
+      "-e"
+      "--force-windows-fullscreen"
+      "--mangoapp"
+    ];
+  };
+
+  # Configure MangoHud
+  programs.mangohud = {
+    enable = true;
+    settings = {
+      preset = 4;
+    };
   };
 }
 
