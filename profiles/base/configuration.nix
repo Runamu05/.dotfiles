@@ -10,8 +10,6 @@
       ../../system/hardware-configuration.nix
       ../../system/hardware
       ../../system/wm/hyprland.nix
-      ../../system/terminals/alacritty.nix
-      ../../system/dependencies
       ../../system/fonts/fonts.nix
       ../../system/apps/games
       ../../system/apps/performance
@@ -77,7 +75,7 @@
   # services.xserver.libinput.enable = true;
 
   # Enable AMD rocm support
-  nixpkgs.config.rocmSupport=true;
+  nixpkgs.config.rocmSupport = true;
 
   # Manage CPU, GPU governor and fan speed
   hardware.cpu.amd.ryzen-smu.enable = true;
