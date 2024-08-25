@@ -3,11 +3,7 @@
 {
   imports = [
     ../../user/wm/hyprland/default.nix
-    ../../user/apps/games
-    ../../user/apps/socials
-    ../../user/apps/editors
-    ../../user/apps/others
-    ../../user/apps/browsers
+    ../../user/apps
     ../../user/shell
 
   ];
