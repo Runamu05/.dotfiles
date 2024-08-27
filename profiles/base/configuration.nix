@@ -20,7 +20,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.extraModulePackages = [
+    pkgs.linuxKernel.packages.linux_zen.ryzen-smu
+    pkgs.linuxKernel.packages.linux_zen.cpupower
+  ]; 
 
   networking.hostName = "runapc"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -111,6 +116,15 @@
 
   # Default Shell
   users.defaultUserShell = pkgs.nushell;
+
+  # Support NTFS file system
+  boot.supportedFilesystems = [ "ntfs" ];
+
+  fileSystems."/home/runamu/Giochini" = {
+    device = "/dev/nvme0n1p5";
+    fsType = "ntfs-3g";
+    options = [ "nofail" "rw" "uid = runamu" ];
+  };
 
   # Storage optimization
   nix.settings.auto-optimise-store = true;
