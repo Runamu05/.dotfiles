@@ -27,7 +27,7 @@
     cpupower
   ];
 
-  networking.hostName = "runapc"; # Define your hostname.
+  networking.hostName = "runamu"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable tlp (saves battery life)
