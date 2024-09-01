@@ -3,7 +3,7 @@
 {
   imports = [
     ./brave.nix
-    ./games.nix
+  #  ./games.nix
     ./media.nix
     ./editors.nix
     ./socials.nix
