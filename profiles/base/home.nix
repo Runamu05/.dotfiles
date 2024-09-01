@@ -5,7 +5,7 @@
     ../../user/wm/hyprland/default.nix
     ../../user/apps
     ../../user/shell
-
+    ../../user/apps/games.nix
   ];
 
   nixpkgs.config = {
