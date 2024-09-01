@@ -98,9 +98,9 @@ in
       "$mod, S, exec, spotify"
       "$mod, O, exec, obs"
       "$mod, I, exec, ${pkgs.jetbrains.idea-community-bin}/bin/idea-community"
-      "$mod SHIFT, S, exec, steam"
+    #  "$mod SHIFT, S, exec, steam"
       "$mod, M, exec, prismlauncher"
-      "$mod, C, exec, cemu"
+    #  "$mod, C, exec, cemu"
       "$mod, D, exec, ${pkgs.dolphin}/bin/dolphin"
       "$mod, B, exec, ${pkgs.brave}/bin/brave"
     ] ++ (
