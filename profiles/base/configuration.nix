@@ -11,7 +11,7 @@
       ../../system/hardware
       ../../system/wm/hyprland.nix
       ../../system/fonts/fonts.nix
-      ../../system/apps/games
+    #  ../../system/apps/games
       ../../system/apps/performance
     ];
 
@@ -22,10 +22,10 @@
   # Kernel
   #boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.extraModulePackages = [
-    pkgs.linuxKernel.packages.linux_zen.ryzen-smu
-    pkgs.linuxKernel.packages.linux_zen.cpupower
-  ]; 
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    ryzen-smu
+    cpupower
+  ];
 
   networking.hostName = "runapc"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -86,21 +86,17 @@
   hardware.cpu.amd.ryzen-smu.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
 
-  services.tlp = {
-    enable = false;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-      CPU_SCALING_MIN_FREQ_ON_AC = 2400000;
-      CPU_SCALING_MAX_FREQ_ON_AC = 4300000;
-      CPU_SCALING_MIN_FREQ_ON_BAT = 800000;
-      CPU_SCALING_MAX_FREQ_ON_BAT = 3000000;
-    };
-  };
   environment.systemPackages = with pkgs; [
+    linuxKernel.packages.linux_zen.ryzen-smu
+    linuxKernel.packages.linux_zen.cpupower
     msr-tools
-    ryzenadj
+    ( ryzenadj.overrideAttrs {
+      buildPhase = ''
+        cmake -DCMAKE_BUILD_TYPE=Debug .
+        make
+      '';
+    } )
+    acpidump-all
     lact
   ];
 
@@ -119,12 +115,11 @@
 
   # Support NTFS file system
   boot.supportedFilesystems = [ "ntfs" ];
-
-  fileSystems."/home/runamu/Giochini" = {
-    device = "/dev/nvme0n1p5";
-    fsType = "ntfs-3g";
-    options = [ "nofail" "rw" "uid = runamu" ];
-  };
+  #fileSystems."/path/to/mount" = {
+  #  device = "/path/to/device";
+  #  fsType = "ntfs-3g";
+  #  options = [ "nofail" "rw" "uid = runamu" ];
+  #};
 
   # Storage optimization
   nix.settings.auto-optimise-store = true;
@@ -171,14 +166,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+ 
+  system.stateVersion = "24.11";
 
   nix.settings.experimental-features = ["nix-command" "flakes" ];
 }
