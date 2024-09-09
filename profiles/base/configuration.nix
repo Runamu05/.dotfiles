@@ -11,7 +11,7 @@
       ../../system/hardware
       ../../system/wm/hyprland.nix
       ../../system/fonts/fonts.nix
-    #  ../../system/apps/games
+      ../../system/apps/games
       ../../system/apps/performance
     ];
 
@@ -20,8 +20,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = with config.boot.kernelPackages; [
     ryzen-smu
     cpupower
@@ -115,11 +114,11 @@
 
   # Support NTFS file system
   boot.supportedFilesystems = [ "ntfs" ];
-  #fileSystems."/path/to/mount" = {
-  #  device = "/path/to/device";
-  #  fsType = "ntfs-3g";
-  #  options = [ "nofail" "rw" "uid = runamu" ];
-  #};
+  fileSystems."/home/runamu/Games" = {
+    device = "/dev/nvme0n1p5";
+    fsType = "ntfs-3g";
+    options = [ "nofail" "rw" "uid = runamu" ];
+  };
 
   # Storage optimization
   nix.settings.auto-optimise-store = true;
