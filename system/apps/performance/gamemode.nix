@@ -9,9 +9,9 @@
     settings = {
 
       general = {
-        renice = -5;
+        renice = 10;
         desiredgov = "performance";
-        igpu_desiredgov = "ondemand";
+        igpu_desiredgov = "performance";
         igpu_power_threshold = -1;
         softrealtime = "auto";
         ioprio = 0;
