@@ -5,6 +5,18 @@ let
     url = "https://images.wallpapersden.com/image/download/hd-train-view-at-sunset_bmZobWmUmZqaraWkpJRobWllrWdma2U.jpg";
     sha256 = "sha256-vL0srC+hJgY7Rus8Z6sw/eSUM+dEOf2alU56UTtfRZE=";
   };  
+  wallpaper2 = pkgs.fetchurl {
+    url = "https://initiate.alphacoders.com/images/133/cropped-3840-2160-1330716.png?6781";
+    sha256 = "sha256-wK40M6HiMyNckpsXPeWPjBtSo4u21m3fE82v/wUAvYk=";
+  };
+  wallpaper3 = pkgs.fetchurl {
+    url = "https://www.wallpaperflare.com/red-neon-light-night-the-city-street-art-oskar-woinski-neon-haze-wallpaper-shfll/download/3840x2160";
+    sha256 = "";
+  };
+  wallpaper4 = pkgs.fetchurl {
+    url = "";
+    hash = "";
+  };
 in
 {
   wayland.windowManager.hyprland = {
@@ -32,7 +44,7 @@ in
     # Size cursor
     env = "XCURSOR_SIZE, 24"; 
 
-    # Set wallpaper 
+    # Set default wallpaper 
     exec = "${pkgs.swaybg}/bin/swaybg -m fill -i ${wallpaper}";
 
     "$mod" = "SUPER";
@@ -60,6 +72,8 @@ in
       "$mod CTRL, R, exec, $terminal $HOME/.dotfiles/nixrebuild.sh"
       # Update NixOS
       "$mod CTRL, U, exec, $terminal $HOME/.dotfiles/nixupdate.sh"
+      # Clean NixOS
+      "$mod CTRL, C, exec, $terminal $HOME/.dotfiles/nixclean.sh"
 
       # Override Power-off and Reboot commands
       "$mod SHIFT CTRL, R, exec, systemctl reboot"
@@ -87,6 +101,10 @@ in
       # Screenshot and Copy to Clipboard
       ", Print, exec, ${pkgs.grimblast}/bin/grimblast --notify copy"
 
+      # Set wallpapers
+      "$mod CTRL, 1, exec, ${pkgs.swaybg}/bin/swaybg -m fill -i ${wallpaper}"
+      "$mod CTRL, 2, exec, ${pkgs.swaybg}/bin/swaybg -m fill -i ${wallpaper2}"
+
       # Utility
       "$mod SHIFT, H, exec, $terminal ${pkgs.btop}/bin/btop"
       "$mod, N, exec, $terminal nvim"
@@ -98,9 +116,9 @@ in
       "$mod, S, exec, spotify"
       "$mod, O, exec, obs"
       "$mod, I, exec, ${pkgs.jetbrains.idea-community-bin}/bin/idea-community"
-    #  "$mod SHIFT, S, exec, steam"
+      "$mod SHIFT, S, exec, steam"
       "$mod, M, exec, prismlauncher"
-    #  "$mod, C, exec, cemu"
+      "$mod, C, exec, cemu"
       "$mod, D, exec, ${pkgs.dolphin}/bin/dolphin"
       "$mod, B, exec, ${pkgs.brave}/bin/brave"
     ] ++ (
