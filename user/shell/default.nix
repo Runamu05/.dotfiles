@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  imports = [ ./nushell.nix ];
+
   home.packages = with pkgs; [
     # Download manager via HTTPS, HTTP, FTP
     wget
@@ -12,6 +14,6 @@
     htop
     btop
     # Manage audio
-    pavucontrol
+    pavucontrol 
   ];
 }
