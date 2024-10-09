@@ -5,15 +5,24 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = [ pkgs.amdvlk ];
-      extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+      extraPackages = with pkgs; [ 
+        rocmPackages.clr.icd
+      #  pkgs.amdvlk
+      ];
+      extraPackages32 = [ 
+      #  pkgs.driversi686Linux.amdvlk
+      ];
     };
-    #amdgpu.amdvlk = {
-    # enable = true;
-    # support32Bit = "pkgs.driversi686Linux.amdvlk";
-    # supportExperimental = true;
-    #};
+    amdgpu = {
+      #initrd.enable = true;
+      #opencl.enable = true;
+      #amdvlk = {
+      #  enable = true;
+      #  support32Bit.enable = true;
+      #  supportExperimental.enable = true;
+      #};
+    };
   };
 
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = [ "amdgpu" ];
 }
