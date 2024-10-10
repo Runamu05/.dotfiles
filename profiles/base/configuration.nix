@@ -20,6 +20,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel
+  #boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = with config.boot.kernelPackages; [
     ryzen-smu
@@ -112,13 +113,17 @@
   # Default Shell
   users.defaultUserShell = pkgs.nushell;
 
+
+  # Support MTP devices
+  services.gvfs.enable = true;
+
   # Support NTFS file system
   boot.supportedFilesystems = [ "ntfs" ];
-  fileSystems."/home/runamu/Games" = {
-    device = "/dev/nvme0n1p5";
-    fsType = "ntfs-3g";
-    options = [ "nofail" "rw" "uid = runamu" ];
-  };
+  #fileSystems."/path/to/mount" = {
+  #  device = "/path/to/device";
+  #  fsType = "ntfs-3g";
+  #  options = [ "nofail" "rw" "uid = runamu" ];
+  #};
 
   # Storage optimization
   nix.settings.auto-optimise-store = true;
@@ -134,8 +139,9 @@
     description = "Runamu";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      neovim
       git
+      usbutils
+      neovim
     ];
   };
 
