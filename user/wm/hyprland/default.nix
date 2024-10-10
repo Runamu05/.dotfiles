@@ -26,8 +26,8 @@ in
     systemd.enable = true;
 
     plugins = [
-    #  inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-    #  inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
+      #inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
+      #inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
     ];
   };
 
@@ -80,11 +80,15 @@ in
       "$mod SHIFT CTRL, P, exec, systemctl poweroff"
       ", XF86PowerOff, exec, "
 
+      # Switch monitor focus
+      "$mod SHIFT CTRL, 1, focusmonitor, 1"
+      "$mod SHIFT CTRL, 2, focusmonitor, 2"
+
       # Quit session 
       "$mod SHIFT CTRL, L, exit,"
 
       # Terminal
-      "$mod SHIFT, T, exec, $terminal"
+      "$mod CTRL, T, exec, $terminal"
 
       # Manage windows and Move focus
       "$mod SHIFT, Q, killactive,"
@@ -95,7 +99,7 @@ in
       "$mod, down, movefocus, d"
       "$mod SHIFT, P, pseudo # dwindle"
       "$mod, J, togglesplit,"
-  
+
       # Screenshot, Copy to Clipboard and Save
       "$mod, Print, exec, ${pkgs.grimblast}/bin/grimblast --notify copysave"
       # Screenshot and Copy to Clipboard
@@ -110,13 +114,19 @@ in
       "$mod, N, exec, $terminal nvim"
       "$mod SHIFT, C, exec, corectrl"
       "$mod, L, exec, lact"
+      "$mod, A, exec, ${pkgs.android-file-transfer}/bin/android-file-transfer"
 
       # Apps
+      "$mod SHIFT, C, exec, cosmic-edit"
+      "$mod SHIFT, D, exec, discord"
+      "$mod SHIFT, S, exec, steam"
+      "$mod SHIFT, T, exec, ${pkgs.torrential}/bin/com.github.davidmhewitt.torrential"
       "$mod, T, exec, telegram-desktop"
       "$mod, S, exec, spotify"
       "$mod, O, exec, obs"
+      "$mod, G, exec, gimp"
       "$mod, I, exec, ${pkgs.jetbrains.idea-community-bin}/bin/idea-community"
-      "$mod SHIFT, S, exec, steam"
+      "$mod, H, exec, heroic"
       "$mod, M, exec, prismlauncher"
       "$mod, C, exec, cemu"
       "$mod, D, exec, ${pkgs.dolphin}/bin/dolphin"
@@ -133,8 +143,8 @@ in
             in [
               "$mod, ${ws}, workspace, ${toString (x + 1)}"
               "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-              "$mod CTRL, ${ws}, movetoworkspace, ${toString (x + 1)}"
-              "$mod SHIFT CTRL, ${ws}, movetoworkspace, ${toString (x + 1)}"
+              "$mod CTRL, ${ws}, exec, ${toString (x + 1)}"
+              "$mod SHIFT CTRL, ${ws}, exec, ${toString (x + 1)}"
             ]
           )
           10)
