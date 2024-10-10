@@ -13,6 +13,8 @@
     # Get system stats
     htop
     btop
+    # Get battery stats and other ACPI info
+    acpi
     # Manage audio
     pavucontrol 
   ];
