@@ -7,7 +7,11 @@
     jetbrains.idea-community-bin
     # Nixvim
     inputs.nixvim.packages."x86_64-linux".default
+    # Cosmic Editor
+    cosmic-edit
     # Obsidian
-    obsidian 
+    obsidian
+    # GIMP (photo editor)
+    gimp
   ];
 }
