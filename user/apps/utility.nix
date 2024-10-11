@@ -11,5 +11,7 @@
     appimage-run
     # Connect to another device
     kdeconnect
+    # OS Virtualization
+    gnome-boxes
   ];
 }
