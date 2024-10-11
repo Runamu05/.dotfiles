@@ -69,11 +69,11 @@ in
 
     bind = [
       # Rebuild NixOS
-      "$mod CTRL, R, exec, $terminal $HOME/.dotfiles/nixrebuild.sh"
+      "$mod CTRL, R, exec, $terminal $HOME/.dotfiles/scripts/nixrebuild.sh"
       # Update NixOS
-      "$mod CTRL, U, exec, $terminal $HOME/.dotfiles/nixupdate.sh"
+      "$mod CTRL, U, exec, $terminal $HOME/.dotfiles/scripts/nixupdate.sh"
       # Clean NixOS
-      "$mod CTRL, C, exec, $terminal $HOME/.dotfiles/nixclean.sh"
+      "$mod CTRL, C, exec, $terminal $HOME/.dotfiles/scripts/nixclean.sh"
 
       # Override Power-off and Reboot commands
       "$mod SHIFT CTRL, R, exec, systemctl reboot"
@@ -112,13 +112,13 @@ in
       # Utility
       "$mod SHIFT, H, exec, $terminal ${pkgs.btop}/bin/btop"
       "$mod, N, exec, $terminal nvim"
-      "$mod SHIFT, C, exec, corectrl"
       "$mod, L, exec, lact"
       "$mod, A, exec, ${pkgs.android-file-transfer}/bin/android-file-transfer"
 
       # Apps
       "$mod SHIFT, C, exec, cosmic-edit"
       "$mod SHIFT, D, exec, discord"
+      "$mod SHIFT, G, exec, gnome-boxes"
       "$mod SHIFT, S, exec, steam"
       "$mod SHIFT, T, exec, ${pkgs.torrential}/bin/com.github.davidmhewitt.torrential"
       "$mod, T, exec, telegram-desktop"
@@ -149,8 +149,6 @@ in
           )
           10)
       );
-
-
   };
 
   wayland.windowManager.hyprland.extraConfig = ''
